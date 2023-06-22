@@ -1,24 +1,64 @@
-import logo from './logo.svg';
+import { Avatar, Layout, Menu } from 'antd';
+import { ComponentesAntd } from './ComponentesAntd';
+import { ComponentesAntd2 } from './ComponentesAntd2';
+import { Html5Outlined, UserOutlined, QuestionCircleOutlined, DeleteOutlined } from '@ant-design/icons';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
 
 function App() {
+
+  const rotas = createBrowserRouter([{
+    path: "/",
+    element: <ComponentesAntd />
+  },
+  {
+    path: "/usuario",
+    element: <ComponentesAntd2 />
+  },
+  {
+    path: "/duvida",
+    element: <h1>Duvida</h1>
+  },
+  {
+    path: "/excluir",
+    element: <h1>Excluir</h1>
+  }]);
+
+  const Conteudo = (props) => {
+    return <RouterProvider router={ rotas }/>
+  }
+
+  const itemMenuSelecionado = (item) => {
+    rotas.navigate(item.key);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout style={{height: "100vh"}}>
+      <Layout.Header style={{color: "white"}}>
+
+      <div style={{ display:"flex", height: 50, flexDirection:"row", alignContent: "center", alignItems: "center" }}>
+        <Avatar icon={ <Html5Outlined/> } />
+        <h1>Cabecalho</h1>
+      </div>
+      </Layout.Header>
+
+      <Layout>
+        <Layout.Sider>
+          <Menu theme='dark' onClick={itemMenuSelecionado}>
+            <Menu.Item key="/usuario" icon={ <UserOutlined/> }>Usuarios</Menu.Item>
+            <Menu.Item key="/duvida" icon={ <QuestionCircleOutlined/> }>Duvidas</Menu.Item>
+            <Menu.Item key="/excluir" icon={ <DeleteOutlined/> }>Excluir</Menu.Item>
+          </Menu>
+        </Layout.Sider>
+
+        <Layout.Content>
+          <div style={{marginLeft: 10}}>
+            <Conteudo />
+          </div>
+        </Layout.Content>
+      </Layout>
+      <Layout.Footer><h1>Rodape</h1></Layout.Footer>
+    </Layout>
   );
 }
 
