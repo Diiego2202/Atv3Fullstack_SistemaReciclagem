@@ -21,7 +21,7 @@ useEffect(() => {
                 {user?.status === 200
                 ? <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start'}}>
                     <Title level={1} style={{ textAlign: 'left', marginTop: 20 }}>
-                    {"Olá " + user.usuario.nome + " :)" }
+                    {"Olá " + user.usuario.username + " :)" }
                     </Title>
                 </div>
                 : null
